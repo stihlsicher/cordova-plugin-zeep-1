@@ -1,4 +1,3 @@
-using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,11 +31,11 @@ namespace FiNeZeep
 			{
 				string from = (string)args[0];
 				string fromPath = getPath(from);
-				StorageFolder fromFolder = await StorageFolder.GetFolderFromPathAsync(fromPath);
+				//StorageFolder fromFolder = await StorageFolder.GetFolderFromPathAsync(fromPath);
 				
 				string to = (string)args[1];
 				string toPath = getPath(to);
-				string toParentPath = getPathParent(toPath);
+                /*string toParentPath = getPathParent(toPath);
 				StorageFolder toParentFolder = await StorageFolder.GetFolderFromPathAsync(toParentPath);
 				StorageFile toFile = await toParentFolder.CreateFileAsync(Path.GetFileName(toPath), CreationCollisionOption.ReplaceExisting);
 				
@@ -58,8 +57,9 @@ namespace FiNeZeep
 							ZipFile.Write(bytes, 0, bytes.Length);
 						}
 					});
-				}
-				
+				}*/
+
+                ZipFile.CreateFromDirectory(fromPath, toPath);
 				return string.Empty;
 			}
 			catch (Exception e)
@@ -84,11 +84,11 @@ namespace FiNeZeep
 			{
 				string from = (string)args[0];
 				string fromPath = getPath(from);
-				StorageFile fromFile = await StorageFile.GetFileFromPathAsync(fromPath);
+				//StorageFile fromFile = await StorageFile.GetFileFromPathAsync(fromPath);
 				
 				string to = (string)args[1];
 				string toPath = getPath(to);
-				string toParentPath = getPathParent(toPath);
+                /*string toParentPath = getPathParent(toPath);
 				StorageFolder toParentFolder = await StorageFolder.GetFolderFromPathAsync(toParentPath);
 				StorageFolder toFolder = await toParentFolder.CreateFolderAsync(Path.GetFileName(toPath), CreationCollisionOption.OpenIfExists);
 				
@@ -112,7 +112,8 @@ namespace FiNeZeep
 							await fileStream.FlushAsync();
 						}
 					}
-				}
+				}*/
+                ZipFile.ExtractToDirectory(fromPath, toPath);
 				
 				return string.Empty;
 			}
